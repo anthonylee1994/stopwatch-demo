@@ -7,13 +7,13 @@ interface Props {
 }
 
 export const Timer = React.memo<Props>(({ ms }) => {
-  const [displayTime, millisecond] = TimerUtil.formatTime(ms);
+  const [displayTime, milliseconds] = TimerUtil.formatTime(ms);
 
   return (
     <div className="timer">
       <div className="time-display">
         {displayTime}
-        <div className="time-ms-display">{millisecond}</div>
+        <div className="time-ms-display">{milliseconds}</div>
       </div>
     </div>
   );
