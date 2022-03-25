@@ -1,0 +1,26 @@
+.start-button,
+.pause-button,
+.continue-button {
+  border: solid 3px #000;
+  border-radius: 15px;
+  width: 100%;
+  padding: 15px;
+  font-size: 28px;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.start-button:active,
+.pause-button:active,
+.continue-button:active {
+  opacity: 0.5;
+}
+
+.start-button,
+.continue-button {
+  background-color: #0f0;
+}
+
+.pause-button {
+  background-color: lightskyblue;
+}

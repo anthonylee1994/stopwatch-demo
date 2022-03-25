@@ -1,0 +1,13 @@
+.lap-button {
+  background-color: lightblue;
+  border: solid 3px #000;
+  border-radius: 15px;
+  padding: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  flex-shrink: 1;
+}
+
+.lap-button:active {
+  opacity: 0.5;
+}

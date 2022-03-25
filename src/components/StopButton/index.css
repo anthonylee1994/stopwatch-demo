@@ -1,0 +1,14 @@
+.stop-button {
+  background-color: #f00;
+  border: solid 3px #000;
+  border-radius: 15px;
+  width: 100%;
+  min-width: none;
+  padding: 15px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.stop-button:active {
+  opacity: 0.5;
+}
