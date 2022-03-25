@@ -1,4 +1,4 @@
-# Create React App - Stopwatch Demo
+# Create React App - Stopwatch Tutorial Demo
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
