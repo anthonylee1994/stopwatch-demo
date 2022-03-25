@@ -27,14 +27,16 @@ export const StopWatchDemo = React.memo(() => {
 
   const calculateTimerMilliseconds = React.useCallback(
     (pausedMilliseconds: number = 0) => {
-      const newTimeMilliseconds = currentTime.getTime();
-      const oldTimeMilliseconds = startTime?.getTime() ?? 0;
+      const currentTimeMilliseconds = currentTime.getTime();
+      const startTimeMilliseconds = startTime?.getTime() ?? 0;
 
       if (startTime === null) {
         return 0;
       }
 
-      return pausedMilliseconds + (newTimeMilliseconds - oldTimeMilliseconds);
+      return (
+        pausedMilliseconds + (currentTimeMilliseconds - startTimeMilliseconds)
+      );
     },
     [currentTime, startTime]
   );
