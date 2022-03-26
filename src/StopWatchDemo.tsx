@@ -30,9 +30,7 @@ export const StopWatchDemo = React.memo(() => {
       const currentTimeMilliseconds = currentTime.getTime();
       const startTimeMilliseconds = startTime?.getTime() ?? 0;
 
-      if (startTime === null) {
-        return 0;
-      }
+      if (startTime === null) return 0;
 
       return (
         pausedMilliseconds + (currentTimeMilliseconds - startTimeMilliseconds)
@@ -41,29 +39,37 @@ export const StopWatchDemo = React.memo(() => {
     [currentTime, startTime]
   );
 
+  const resumeTimer = React.useCallback(() => {
+    setTimerState("paused");
+    clearInterval(windowTimer);
+
+    setPreviousPausedMilliseconds(pausedMilliseconds);
+    setPausedMilliseconds(calculateTimerMilliseconds(pausedMilliseconds));
+  }, [calculateTimerMilliseconds, pausedMilliseconds, windowTimer]);
+
+  const pauseTimer = React.useCallback(() => {
+    setTimerState("running");
+
+    const now = new Date();
+    setStartTime(now);
+    setCurrentTime(now);
+
+    setWindowTimer(
+      window.setInterval(() => {
+        setCurrentTime(new Date());
+      }, 1)
+    );
+  }, []);
+
   const onStartButtonClick = React.useCallback(() => {
     if (timerState === "running") {
-      setTimerState("paused");
-      clearInterval(windowTimer);
-
-      setPreviousPausedMilliseconds(pausedMilliseconds);
-      setPausedMilliseconds(calculateTimerMilliseconds(pausedMilliseconds));
+      resumeTimer();
     } else {
-      setTimerState("running");
-
-      const now = new Date();
-      setStartTime(now);
-      setCurrentTime(now);
-
-      setWindowTimer(
-        window.setInterval(() => {
-          setCurrentTime(new Date());
-        }, 1)
-      );
+      pauseTimer();
     }
-  }, [timerState, windowTimer, calculateTimerMilliseconds, pausedMilliseconds]);
+  }, [timerState, resumeTimer, pauseTimer]);
 
-  const onClearButtonClick = React.useCallback(() => {
+  const clearTimer = React.useCallback(() => {
     setTimerState("stopped");
     clearInterval(windowTimer);
     setStartTime(null);
@@ -100,7 +106,7 @@ export const StopWatchDemo = React.memo(() => {
         <ActionBar>
           <StartButton onClick={onStartButtonClick} timerState={timerState} />
           <LapButton onClick={onLapButtonClick} />
-          <StopButton onClick={onClearButtonClick} />
+          <StopButton onClick={clearTimer} />
         </ActionBar>
         <LapsList laps={laps} />
         <BottomBar />
